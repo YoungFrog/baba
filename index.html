@@ -68,7 +68,8 @@
 	  cartes[i].innerText = "";
       }
       function afficherCarte(i) {
-	  cartesRévélées.push(i)
+	  if (cartesRévélées[0] != i)
+	      cartesRévélées.push(i)
 	  cartes[i].innerText = valeursCartes[i];
       }
 
