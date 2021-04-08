@@ -47,9 +47,10 @@
       <div class="carte">
       </div>
     </main>
-    <footer>
-      C'est le site de Baptiste !
-    </footer>
+
+    <div id="bravo" hidden>
+      Bravo vous avez gagné !
+    </div>
     <script>
       let cartes = document.querySelectorAll(".carte")
       let valeursCartes = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
@@ -88,7 +89,15 @@
 	      }
 	      cartesRévélées = []
 	  }
+	  if (document.querySelectorAll(".carte.good").length == valeursCartes.length) {
+	      afficherBravo()
+	  }
       }
+
+      function afficherBravo() {
+	  document.querySelector("#bravo").hidden = false;
+      }
+
       function mélanger(valeurs) {
 	  for (let i = 0; i < valeurs.length; i++) {
 	      let j = choisirAuHasardCase(valeurs, i, valeurs.length)
