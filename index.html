@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <title>Le site web de Baba</title>
+    <style>
+      .carte {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  width: 2cm;
+	  height: 2cm;
+	  background-color: red;
+	  border: 1px solid green;
+      }
+
+      .carte.good {
+	  background-color: green;
+	  color: white;
+      }
+
+      .cartes {
+	  display: grid;
+	  grid-template-columns: repeat(5,auto);
+	  grid-gap: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="cartes">
+      <div class="carte">
+      </div>
+      <div class="carte">
+      </div>
+      <div class="carte">
+      </div>
+      <div class="carte">
+      </div>
+      <div class="carte">
+      </div>
+      <div class="carte">
+      </div>
+      <div class="carte">
+      </div>
+      <div class="carte">
+      </div>
+      <div class="carte">
+      </div>
+      <div class="carte">
+      </div>
+    </main>
+    <footer>
+      C'est le site de Baptiste !
+    </footer>
+    <script>
+      let cartes = document.querySelectorAll(".carte")
+      let valeursCartes = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+      let cartesRévélées = [];
+
+      mélanger(valeursCartes)
+      for (let i = 0; i < cartes.length; i++) {
+	  cacherCarte(i);
+	  cartes[i].onclick=function() {
+	      afficherCarte(i);
+	      verifier_Si_Egal_A_Une_Autre_Carte();
+	  }
+      }
+
+      function cacherCarte(i) {
+	  cartes[i].innerText = "";
+      }
+      function afficherCarte(i) {
+	  cartesRévélées.push(i)
+	  cartes[i].innerText = valeursCartes[i];
+      }
+
+      function valeur(i) {
+	  return valeursCartes[i];
+      }
+
+      function verifier_Si_Egal_A_Une_Autre_Carte() {
+	  if (cartesRévélées.length == 2) {
+	      if (valeur(cartesRévélées[0]) != valeur(cartesRévélées[1])) {
+		  setTimeout(function (cartesRévélées) {
+		      cartesRévélées.forEach(cacherCarte)
+		  }, 2000, cartesRévélées);
+	      } else {
+		  cartesRévélées.forEach(carte => cartes[carte].classList.add("good"))
+	      }
+	      cartesRévélées = []
+	  }
+      }
+      function mélanger(valeurs) {
+	  for (let i = 0; i < valeurs.length; i++) {
+	      let j = choisirAuHasardCase(valeurs, i, valeurs.length)
+	      swap(valeurs, i, j)
+	  }
+      }
+
+      function swap(tab, i, j) {
+	  let temp = tab[i];
+	  tab[i] = tab[j];
+	  tab[j] = temp;
+      }
+      function choisirAuHasardCase(tableau, min, longueur){
+	  return min + Math.floor(Math.random()*(longueur - min))
+      }
+      
+    </script>
+
+  </body>
+</html>
